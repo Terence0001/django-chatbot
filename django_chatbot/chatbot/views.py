@@ -1,19 +1,21 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import openai
+import os
 
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Chat
 
 from django.utils import timezone
+from dotenv import load_dotenv
 
 
-openai_api_key = 'input-your-key'
-openai.api_key = openai_api_key
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def ask_openai(message):
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model = "gpt-4",
         messages=[
             {"role": "system", "content": "You are an helpful assistant."},
@@ -26,16 +28,21 @@ def ask_openai(message):
 
 # Create your views here.
 def chatbot(request):
-    chats = Chat.objects.filter(user=request.user)
+    if request.user.is_authenticated:
+        chats = Chat.objects.filter(user=request.user)
 
-    if request.method == 'POST':
-        message = request.POST.get('message')
-        response = ask_openai(message)
+        if request.method == 'POST':
+            message = request.POST.get('message')
+            response = ask_openai(message)
 
-        chat = Chat(user=request.user, message=message, response=response, created_at=timezone.now())
-        chat.save()
-        return JsonResponse({'message': message, 'response': response})
-    return render(request, 'chatbot.html', {'chats': chats})
+            chat = Chat(user=request.user, message=message, response=response, created_at=timezone.now())
+            chat.save()
+            return JsonResponse({'message': message, 'response': response})
+        return render(request, 'chatbot.html', {'chats': chats})
+    else:
+        return redirect('login')
+
+
 
 
 def login(request):
