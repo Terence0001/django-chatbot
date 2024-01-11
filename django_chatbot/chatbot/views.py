@@ -18,7 +18,7 @@ def ask_openai(message):
     response = openai.chat.completions.create(
         model = "gpt-4",
         messages=[
-            {"role": "system", "content": "You are an helpful assistant."},
+            {"role": "system", "content": "Tu est un assistant de recherche dans le droit français et si tu n'a pas de réponses n'invente pas les choses."},
             {"role": "user", "content": message},
         ]
     )
