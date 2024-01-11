@@ -67,11 +67,11 @@
 {% block content %}
 <div class="chat-container">
   <div class="card flex-grow-1">
-    <div class="card-header bg-primary text-white">Chat</div>
+    <div class="card-header bg-primary text-white">Assistant</div>
     {% if user.is_authenticated %}
-    <div class="card-header bg-primary text-white"><b>Welcome, {{user.username}}</b>   <a style="color: yellow;" href="logout">Logout</a></div>
+    <div class="card-header bg-primary text-white"><b>Bienvenue, {{user.username}}</b>   <a style="color: yellow;" href="logout">Déconnexion</a></div>
     {% else %}
-    <div class="card-header bg-primary text-white"><a style="color: yellow" href="login">Login</a>   <a style="color: yellow;" href="register">Register</a></div>
+    <div class="card-header bg-primary text-white"><a style="color: yellow" href="login">Connexion</a>   <a style="color: yellow;" href="register">Inscription</a></div>
     {% endif %}
     <div class="card-body messages-box">
       
@@ -94,7 +94,7 @@
             <li class="message sent">
           <div class="message-text">
             <div class="message-sender">
-              <b>You</b>
+              <b>Vous</b>
             </div>
             <div class="message-content">
               {{chat.message}}
@@ -105,7 +105,7 @@
         <li class="message received">
           <div class="message-text">
             <div class="message-sender">
-              <b>AI Chatbot</b>
+              <b>Straticia</b>
             </div>
             <div class="message-content">
               {{chat.response}}
@@ -128,7 +128,7 @@
     <div class="input-group">
       <input type="text" class="form-control message-input" placeholder="Type your message...">
       <div class="input-group-append">
-        <button type="submit" class="btn btn-primary btn-send">Send</button>
+        <button type="submit" class="btn btn-primary btn-send">Envoyer</button>
       </div>
     </div>
   </form>

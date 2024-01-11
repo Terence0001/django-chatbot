@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}S'enregistrer{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block styles %}
 <style>
@@ -71,7 +71,7 @@
 {% block content %}
 <div class="register-container">
   <div class="card">
-    <div class="card-header">S'enregistrer</div>
+    <div class="card-header">Formulaire d'inscription</div>
     <div class="card-body">
       {% if error_message %}
         <div class="alert alert-danger" role="alert">{{ error_message }}</div>
@@ -94,7 +94,7 @@
           <label for="password2">Confirmer le MDP</label>
           <input type="password" class="form-control" id="password2" name="password2" required>
         </div>
-        <button type="submit">S'enregistrer</button>
+        <button type="submit">S'inscrire</button>
       </form>
     </div>
   </div>
